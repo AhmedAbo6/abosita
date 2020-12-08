@@ -6,13 +6,13 @@ def home(request):
 
 def contact(request):
 	context = {
-	'title' : 'Contact Us'
+	'title' : 'Contact 6'
 	}
 	return render(request, 'contact.html', context)
 
 def about(request):
 	context = {
-	'title' : 'About Us'
+	'title' : 'About 6'
 	}
 	return render(request, 'about.html', context)
 
