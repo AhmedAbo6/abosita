@@ -9,8 +9,8 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
-            <h1>Clean Blog</h1>
-            <span class="subheading">A Blog Theme by Start Bootstrap</span>
+            <h1>My Blog</h1>
+            <span class="subheading">My Thinking over the internet</span>
           </div>
         </div>
       </div>
@@ -21,63 +21,56 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
+        {% for post in queryset %}
         <div class="post-preview">
-          <a href="post.html">
+          <a href="{{ post.get_absolute_url }}">
             <h2 class="post-title">
-              Man must explore, and this is exploration at its greatest
+              {{ post.title }}
             </h2>
             <h3 class="post-subtitle">
-              Problems look mighty small from 150 miles up
+              What is in my mind
             </h3>
           </a>
           <p class="post-meta">Posted by
-            <a href="#">Start Bootstrap</a>
-            on September 24, 2019</p>
+            <a href="/">{{ post.author }}</a>
+            on {{ post.timestamp }}</p>
         </div>
         <hr>
-        <div class="post-preview">
-          <a href="post.html">
-            <h2 class="post-title">
-              I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.
-            </h2>
-          </a>
-          <p class="post-meta">Posted by
-            <a href="#">Start Bootstrap</a>
-            on September 18, 2019</p>
-        </div>
-        <hr>
-        <div class="post-preview">
-          <a href="post.html">
-            <h2 class="post-title">
-              Science has not yet mastered prophecy
-            </h2>
-            <h3 class="post-subtitle">
-              We predict too much for the next year and yet far too little for the next ten.
-            </h3>
-          </a>
-          <p class="post-meta">Posted by
-            <a href="#">Start Bootstrap</a>
-            on August 24, 2019</p>
-        </div>
-        <hr>
-        <div class="post-preview">
-          <a href="post.html">
-            <h2 class="post-title">
-              Failure is not an option
-            </h2>
-            <h3 class="post-subtitle">
-              Many say exploration is part of our destiny, but it’s actually our duty to future generations.
-            </h3>
-          </a>
-          <p class="post-meta">Posted by
-            <a href="#">Start Bootstrap</a>
-            on July 8, 2019</p>
-        </div>
-        <hr>
-        <!-- Pager -->
+        {% endfor %}
+
+        
+<!--         Pager
         <div class="clearfix">
           <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
-        </div>
+        </div> -->
+        
+        {% if is_paginated %}
+              <div class="col-md-12">
+                <div class="section-row">
+                  <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                      {% if page_obj.has_previous %}
+                        <li>
+                          <a href="?{{ page_request_var }}={{ page_obj.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                          </a>
+                        </li>
+                    {% endif %}
+                      <li class="active"><a href="?{{ page_request_var }}={{ page_obj.number }}">{{ page_obj.number }}</a></li>
+
+                      {% if page_obj.has_next %}
+                        <li>
+                          <a href="?{{ page_request_var }}={{ page_obj.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                          </a>
+                        </li>
+                      {% endif %}
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+              {% endif %}
+
       </div>
     </div>
   </div>
