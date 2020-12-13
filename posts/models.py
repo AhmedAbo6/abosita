@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 
+from tinymce import models as tinymce_models
+
 User = get_user_model()
 
 
@@ -15,7 +17,7 @@ class Author(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=100)
     slug = models.SlugField(unique=True)
-    content = models.TextField()
+    content = tinymce_models.HTMLField()
     timestamp = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     # image = models.ImageField(upload_to='post_blog')
